@@ -6,6 +6,7 @@ import sessionStorage from 'redux-persist/lib/storage/session'
 import createEncryptor from 'redux-persist-transform-encrypt';
 import rootReducer from './reducers/reducers';
 import thunk from 'redux-thunk';
+import {storageMiddleware} from './middleware';
 
 const middleware = [ thunk ]
 
@@ -13,13 +14,14 @@ var composeEnhancers = compose;
 
 
 if(typeof window !== 'undefined') {
+  middleware.push(storageMiddleware())
   composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 }
 if (process.env.NODE_ENV !== 'production') {
   middleware.push(createLogger())
 }
 const encryptor = createEncryptor({
-  secretKey: 'h5hbfASDDsjna'
+  secretKey: '24j2jknjkdsb'
 });
 const config = {
   key: 'root', // key is required
@@ -42,4 +44,5 @@ function configureStore () {
   let persistor = (persistStore(store));
   return { persistor, store }  
 }
+// persistStore(store);
 export default configureStore;

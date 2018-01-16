@@ -1,7 +1,5 @@
 import { connect } from 'react-redux';
-import MainPage from '../components/mainPage';
-import { setTest } from '../actions/actions'
-import { Api } from './Api';
+import MainBody from '../components/mainBody';
 
 
 // const getIsLoggedIn = (state) => {
@@ -9,24 +7,22 @@ import { Api } from './Api';
 // } 
 const mapStateToProps = (state) => {
     return {
-        test: state.app.test,
-        
+        isLoggedIn: !_.isEmpty(state.user.token),
+
     }
 }
 
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        Api: Api,
         dispatch: dispatch,
-
     }
 }
 
 const Main = (connect(
     mapStateToProps,
     mapDispatchToProps
-)(MainPage))
+)(MainBody))
 
 
 export default Main;
